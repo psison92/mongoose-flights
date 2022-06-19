@@ -6,6 +6,9 @@ const router = Router()
 /* GET flights listing. */
 router.get('/new', flightsCtrl.new)
 
+// POST -- localhost:3000/flights
+router.post('/', flightsCtrl.create)
+
 export {
   router
 }
