@@ -4,10 +4,27 @@
 
 <main>
     <h1><%= title %> </h1>
-    <h2>Airline: <%= flight.airline %></h2>
-    <h2>Airport: <%= flight.airport %></h2>
-    <h2>Flight Number: <%= flight.flightNo %></h2>
-    <h2>Departure Date: <%= flight.departs %></h2>
+    <table>
+        <tr>
+            <th>Airline:</th> 
+            <td><%= flight.airline %></td>
+        </tr>
+        <tr>
+            <th>Airport:</th> 
+            <td><%= flight.airport %></td>
+        </tr>
+        <tr>
+            <th>Flight Number:</th> 
+            <td><%= flight.flightNo %></td>
+        </tr>
+        <tr>
+            <th>Departure Date:</th> 
+            <td><%= flight.departs %></td>
+        </tr>
+    </table>
+    <div>
+        <a href="/flights/<%= flight._id %>/edit">Make changes</a>
+    </div>    
 </main>
 
 <%- include('../partials/footer') %>
