@@ -7,9 +7,14 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
+    console.log('REQ.BODY:', req.body)
+    // checks for and deletes empty inputs to allow default value to be supplied
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key]
+    }
     Flight.create(req.body)
     .then(flight => {
-        console.log(flight)
+        console.log('CREATED FLIGHT:', flight)
         res.redirect('/flights')
     })
     .catch(err => {
