@@ -1,0 +1,13 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/flights/show.css" />
+<%- include('../partials/nav') %>
+
+<main>
+    <h1><%= title %> </h1>
+    <h2>Airline: <%= flight.airline %></h2>
+    <h2>Airport: <%= flight.airport %></h2>
+    <h2>Flight Number: <%= flight.flightNo %></h2>
+    <h2>Departure Date: <%= flight.departs %></h2>
+</main>
+
+<%- include('../partials/footer') %>

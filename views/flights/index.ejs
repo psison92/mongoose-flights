@@ -1,5 +1,5 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<link rel="stylesheet" href="/stylesheets/flights/index.css" />
 <%- include('../partials/nav') %>
 
 <main>
@@ -29,7 +29,7 @@
             </td>
             <td><%= flight.airline %></td>
             <td><%= flight.airport %></td>
-            <td><%= flight.flightNo %></td>
+            <td><a href="/flights/<%= flight._id %>"><%= flight.flightNo %></a></td>
             <td><%= flight.departs %></td> 
         </tr>
         <% }) %>
