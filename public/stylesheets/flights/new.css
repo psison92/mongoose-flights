@@ -11,9 +11,14 @@ form {
     font-size: 20px;
   }
   
+  form > .user-input {
+    background-color: gray;
+  }
+  
   form > button {
     grid-column: span 2;
     width: 160px;
     margin-left: auto;
     font-size: 22px;
+    background-color: gray;
   }
