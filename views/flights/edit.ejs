@@ -7,6 +7,7 @@
     <form action="/flights/<%= flight._id %>?_method=PUT" method="POST">
       <label for="airline-select">Airline:</label>
       <select name="airline" class="user-input" id="airline-select">
+        <option value="<%= flight.airline %>"><%= flight.airline %></option>
         <option value="American">American</option>
         <option value="Southwest">Southwest</option>
         <option value="Spirit">Spirit</option>
@@ -32,7 +33,7 @@
         value="<%= flight.flightNo %>"
         required>
       <label for="departs-input">Departure date:</label>
-      <input type="datetime-local" name="departs" class="user-input" id="departs-input">
+      <input type="datetime-local" value="<%= flight.departs %>" name="departs" class="user-input" id="departs-input">
       <button type="submit">Update Flight</button>
     </form>
   </main>

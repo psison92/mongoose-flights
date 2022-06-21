@@ -32,9 +32,9 @@
         placeholder="Must be between 10 and 9999" 
         required>
       <label for="departs-input">Departure date:</label>
-      <input type="datetime-local" name="departs" class="user-input" id="departs-input">
+      <input type="datetime-local" value="<%= departs %>" name="departs" class="user-input" id="departs-input">
       <button type="submit">Add Flight</button>
     </form>
   </main>
 
-<%- include('../partials/footer') %> 
+<%- include('../partials/footer') %>

@@ -1,8 +1,12 @@
 import { Flight } from '../models/flight.js'
 
 function newFlight(req, res) {
+    const newFlight = new Flight()
+    const defaultDate = newFlight.departs
+    const formattedDate = defaultDate.toISOString().slice(0,16)
     res.render('flights/new', {
-        title: 'Add Flight'
+        title: 'Add Flight',
+        departs: formattedDate
     })
 }
 
@@ -14,12 +18,11 @@ function create(req, res) {
     }
     Flight.create(req.body)
     .then(flight => {
-        console.log('CREATED FLIGHT:', flight)
         res.redirect('/flights')
     })
     .catch(err => {
         console.log(err)
-        res.redirect('flights/new')
+        res.redirect('/')
     })
 }
 
@@ -31,6 +34,10 @@ function index(req, res) {
             flights: flights
         })
     })
+    .catch(err => {
+        console.log(err)
+        res.redirect('/')
+    })
 }
 
 function deleteFlight(req, res) {
@@ -40,7 +47,7 @@ function deleteFlight(req, res) {
     })
     .catch(err => {
         console.log(err)
-        res.redirect('flights')
+        res.redirect('/')
     })
 }
 
@@ -54,7 +61,7 @@ function show(req, res) {
     })
     .catch(err => {
         console.log(err)
-        res.redirect('flights')
+        res.redirect('/')
     })
 }
 
@@ -68,18 +75,36 @@ function edit(req, res) {
     })
     .catch(err => {
         console.log(err)
-        res.redirect('flights')
+        res.redirect('/')
     })
 }
 
 function update(req, res) {
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key]
+    }
     Flight.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(flight => {
         res.redirect(`/flights/${flight._id}`)
     })
     .catch(err => {
         console.log(err)
-        res.redirect('flights')
+        res.redirect('/')
+    })
+}
+
+function createTicket(req, res) {
+    Flight.findById(req.params.id)
+    .then(flight => {
+        flight.tickets.push(req.body)
+        flight.save()
+        .then(() => {
+            res.redirect(`/flights/${flight._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.redirect('/')
     })
 }
 
@@ -91,4 +116,5 @@ export {
     show,
     edit,
     update,
+    createTicket,
 }
