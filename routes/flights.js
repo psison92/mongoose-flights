@@ -27,6 +27,9 @@ router.put('/:id', flightsCtrl.update)
 // DELETE -- localhost:3000/flights/:id
 router.delete('/:id', flightsCtrl.delete)
 
+// DELETE -- localhost:3000/flights/:id/tickets/:ticketId
+router.delete('/:id/tickets/:ticketId', flightsCtrl.deleteTicket)
+
 export {
   router
 }
