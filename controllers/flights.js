@@ -18,7 +18,7 @@ function create(req, res) {
     }
     Flight.create(req.body)
     .then(flight => {
-        res.redirect('/flights')
+        res.redirect(`/flights/${flight._id}`)
     })
     .catch(err => {
         console.log(err)
@@ -53,10 +53,11 @@ function deleteFlight(req, res) {
 
 function show(req, res) {
     Flight.findById(req.params.id)
+    .populate('meal')
     .then(flight => {
         res.render('flights/show', {
             title: 'Flight Details',
-            flight: flight
+            flight,
         })
     })
     .catch(err => {

@@ -78,6 +78,15 @@
             <button type="submit">Add Ticket</button>
         </form>
     </div>
+    <h2>Meals</h2>
+    <form id="add-meal-to-flight-form" action="/meals" method="POST">
+        <select>
+          <% meals.forEach(function(meal) { %>
+            <option><%= meal.name %></option>
+          <% }) %>
+        </select>
+        <button type="submit">Add Meal</button>
+      </form>
 </main>
 
 <%- include('../partials/footer') %>
