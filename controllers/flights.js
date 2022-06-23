@@ -1,4 +1,5 @@
 import { Flight } from '../models/flight.js'
+import { Meal } from '../models/meal.js'
 
 function newFlight(req, res) {
     const newFlight = new Flight()
@@ -11,7 +12,6 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
-    console.log('REQ.BODY:', req.body)
     // checks for and deletes empty inputs to allow default value to be supplied
     for (let key in req.body) {
         if (req.body[key] === '') delete req.body[key]
@@ -53,13 +53,17 @@ function deleteFlight(req, res) {
 
 function show(req, res) {
     Flight.findById(req.params.id)
-    .populate('meal')
+    .populate('meals')
     .then(flight => {
+        Meal.find({_id: {$nin: flight.meals}})
+        .then(meals => {
         res.render('flights/show', {
             title: 'Flight Details',
             flight,
+            meals,
         })
     })
+})
     .catch(err => {
         console.log(err)
         res.redirect('/')
@@ -126,6 +130,21 @@ function deleteTicket(req, res) {
     })
 }
 
+function addToMeal(req, res) {
+    Flight.findById(req.params.id)
+    .then(flight => {
+        flight.meals.push(req.body.mealId)
+        flight.save()
+        .then(() => {
+            res.redirect(`/flights/${flight._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.redirect('/')
+    })
+}
+
 export {
     newFlight as new,
     create,
@@ -136,4 +155,5 @@ export {
     update,
     createTicket,
     deleteTicket,
+    addToMeal,
 }
